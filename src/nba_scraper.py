@@ -6,7 +6,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 
-
 def get_player_stats(player_name):
     chrome_driver_path = r"C:\Users\ausgood\Desktop\NBATrack\src\chromedriver.exe"
     service = Service(chrome_driver_path)
@@ -14,22 +13,35 @@ def get_player_stats(player_name):
     driver.get('https://www.nba.com/players')
 
     wait = WebDriverWait(driver, 15)
+    
     search_box = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, 'input[placeholder="Search Players"]')))
     search_box.send_keys(player_name)
     search_box.send_keys(Keys.RETURN)
 
     try:
-        player_link = wait.until(EC.element_to_be_clickable((By.PARTIAL_LINK_TEXT, player_name)))
+        player_name_formatted = player_name.lower().replace(" ", "-")
+        player_xpath = f"//a[contains(@href, '{player_name_formatted}/')]"
+        
+        player_link = wait.until(EC.element_to_be_clickable((By.XPATH, player_xpath)))
+
         player_link.click()
 
-        time.sleep(3)
+        wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "PlayerSummary_playerStatValue___EDg_")))
 
-        ppg = driver.find_element(By.CLASS_NAME, "PlayerSummary_playerStatValue___EDg_").text
-        rpg = driver.find_elements(By.CLASS_NAME, "PlayerSummary_playerStatValue___EDg_")[1].text
-        apg = driver.find_elements(By.CLASS_NAME, "PlayerSummary_playerStatValue___EDg_")[2].text
+        stat_elements = driver.find_elements(By.CLASS_NAME, "PlayerSummary_playerStatValue___EDg_")
+        
+        if len(stat_elements) >= 3:
+            ppg = stat_elements[0].text  
+            rpg = stat_elements[1].text  
+            apg = stat_elements[2].text 
 
-        return ppg, rpg, apg
+            return ppg, rpg, apg
+        else:
+            print(f"Couldn't extract stats for {player_name}. The page structure might have changed.")
+            return None, None, None
+
     except Exception as e:
+        print(f"Error: {e}")
         return None, None, None
     finally:
         driver.quit()
