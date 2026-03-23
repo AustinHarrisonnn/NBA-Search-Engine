@@ -6,7 +6,7 @@ from threading import Thread
 from nba_scraper import get_player_stats
 
 def search_player_stats():
-    progress_bar.start()  # Start the progress bar animation
+    progress_bar.start()  
     result_label.config(text="Loading...")
 
     def scrape_and_display():
@@ -19,9 +19,8 @@ def search_player_stats():
                 result_label.config(text="Player not found or stats not available.")
         else:
             result_label.config(text="Please enter a player's name.")
-        progress_bar.stop()  # Stop the progress bar animation
+        progress_bar.stop()  
 
-    # Run the scraping function in a separate thread to prevent UI freezing
     Thread(target=scrape_and_display).start()
 
 
@@ -30,15 +29,15 @@ root.geometry('600x400')
 root.title("NBA Player Stats Search")
 root.config(bg="#000B58")
 
-row0_frame = tk.Frame(root, bg="#003161")  # Set the background color for row 0
+row0_frame = tk.Frame(root, bg="#003161")  
 row0_frame.grid(row=0, column=0, columnspan=5, padx=20, pady=10, sticky='ew')
 
-image = Image.open(r'C:\Users\ausgood\Desktop\NBATrack\src\assets\basketballIMG.png')
-image = image.resize((130, 100), Image.ANTIALIAS)
+image = Image.open(r'C:\Users\ausgood\Desktop\Career\NBA-Search-Engine\src\assets\basketballIMG.png')
+image = image.resize((130, 100), Image.LANCZOS)
 image = ImageTk.PhotoImage(image)
 
 image_label = tk.Label(row0_frame, image=image, bg="#003161")
-image_label.image = image  # Prevent garbage collection
+image_label.image = image  
 image_label.grid(row=0, column=0, padx=10, pady=10, sticky='nw')
 
 player_name_label = tk.Label(row0_frame, text="Enter Player's Name:", bg="#003161", fg="white", font=("Helvetica", 12, "bold"))
