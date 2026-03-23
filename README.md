@@ -3,11 +3,15 @@
 ### Overview
 This project uses selenium and python to scrape the NBA's official website for players live stats, specifically points, rebounds, and assists. 
 
+---
+
 ### What it does
 Type in a current NBA player's name, hit search, and the application scrapes NBA.com to retrieve real time player statistics of their current averages.
 - **PPG** – Points per game
 - **RPG** – Rebounds per game
 - **APG** – Assists per game
+
+---
 
 ### How it works
 The app is built in Python using 3 components
