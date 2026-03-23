@@ -1,5 +1,5 @@
 # NBA Search Engine
-
+![app image](https://github.com/AustinHarrisonnn/NBA-Search-Engine/blob/main/pic.PNG?raw=true)
 ## Overview
 This project uses selenium and python to scrape the NBA's official website for players live stats, specifically points, rebounds, and assists. 
 
