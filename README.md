@@ -1,11 +1,11 @@
-## NBA Search Engine
+# NBA Search Engine
 
-### Overview
+## Overview
 This project uses selenium and python to scrape the NBA's official website for players live stats, specifically points, rebounds, and assists. 
 
 ---
 
-### What it does
+## What it does
 Type in a current NBA player's name, hit search, and the application scrapes NBA.com to retrieve real time player statistics of their current averages.
 - **PPG** – Points per game
 - **RPG** – Rebounds per game
@@ -13,7 +13,7 @@ Type in a current NBA player's name, hit search, and the application scrapes NBA
 
 ---
 
-### How it works
+## How it works
 The app is built in Python using 3 components
 - **`gui.py`** – The desktop interface built with Tkinter. Handles user input, displays results, and runs the scraper in a background thread so the UI stays responsive.
 - **`nba_scraper.py`** – Uses Selenium to launch a headless Chrome browser, navigate to NBA.com, search for the player, and extract their stats.
